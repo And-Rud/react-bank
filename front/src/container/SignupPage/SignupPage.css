@@ -1,0 +1,30 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+.text_content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-bottom: 32px;
+}
+.text_content h1 {
+  font-size: 24px;
+  font-weight: 500;
+}
+.text_content p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #939199;
+}
+.singup__button__link {
+  text-decoration: none;
+}

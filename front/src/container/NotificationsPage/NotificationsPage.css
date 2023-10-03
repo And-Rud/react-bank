@@ -1,0 +1,50 @@
+.not__main {
+  background-color: #f5f5f7;
+  height: 852px;
+  border-radius: 24px;
+  padding: 0px 20px;
+}
+.not__block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.not__title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+.not__container {
+  display: flex;
+  gap: 12px;
+  background-color: #fff;
+  width: 100%;
+  padding: 16px 16px;
+  border-radius: 12px;
+  align-items: center;
+}
+.not__message__container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.not__message {
+  font-size: 16px;
+  font-weight: 500;
+}
+.not__info {
+  font-size: 12px;
+  font-weight: 400;
+  color: #939199;
+}
+.not__img {
+  width: 24px;
+  height: 24px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  outline: 5px solid #f0f0f0;
+}

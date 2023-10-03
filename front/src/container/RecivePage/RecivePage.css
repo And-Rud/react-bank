@@ -1,0 +1,56 @@
+.rec__main {
+  background-color: #f5f5f7;
+  height: 852px;
+  border-radius: 24px;
+}
+.rec__page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.rec__title {
+  font-size: 20px;
+  font-weight: 500;
+}
+.rec__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0px 20px;
+}
+.rec__link__conteiner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rec__link {
+  text-decoration: none;
+}
+.rec__icon {
+  width: 30px;
+  height: 30px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.rec__pay {
+  background-color: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px;
+}
+.rec__name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1d1d1f;
+}
+.rec__icon__module {
+  margin-left: auto;
+}

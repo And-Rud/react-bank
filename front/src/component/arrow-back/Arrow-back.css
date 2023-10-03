@@ -1,0 +1,8 @@
+.arrow__container {
+  display: flex;
+  position: absolute;
+}
+.arrow__back {
+  cursor: pointer;
+  padding-left: 15px;
+}

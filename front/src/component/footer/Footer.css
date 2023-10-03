@@ -1,0 +1,14 @@
+.footer__line {
+  width: 134px;
+  border-bottom: 4px solid black;
+
+  border-radius: 2px;
+}
+.footer__line__container {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  bottom: 0px;
+  padding: 14px 130px 8px 130px;
+}

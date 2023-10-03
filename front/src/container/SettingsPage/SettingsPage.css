@@ -1,0 +1,26 @@
+.set__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+.set__title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+.set__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  border-bottom: 1px solid #e9e8eb;
+  width: 100%;
+  padding: 0px 20px;
+  padding-bottom: 20px;
+}
+.set__form__title {
+  font-size: 16px;
+  font-weight: 500;
+}

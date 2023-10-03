@@ -1,0 +1,13 @@
+.header {
+  padding: 18px 26px 14px 27px;
+  display: flex;
+  justify-content: space-between;
+}
+.header__light {
+  color: white;
+}
+
+.header__dark {
+  color: black;
+  filter: invert(100%);
+}

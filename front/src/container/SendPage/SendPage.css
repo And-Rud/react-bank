@@ -1,0 +1,22 @@
+.send__main {
+  background-color: #f5f5f7;
+  height: 852px;
+  border-radius: 24px;
+}
+.send__page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.send__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0px 20px;
+}
+.send__title {
+  font-size: 20px;
+  font-weight: 500;
+}
