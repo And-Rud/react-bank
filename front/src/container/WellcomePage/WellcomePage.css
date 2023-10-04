@@ -22,9 +22,7 @@
   gap: 12px;
   align-items: center;
 }
-.bcontainer a {
-  text-decoration: none;
-}
+
 .text {
   display: flex;
   flex-direction: column;

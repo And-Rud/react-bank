@@ -15,6 +15,7 @@
   gap: 20px;
   align-items: center;
   padding-bottom: 32px;
+  padding-top: 20px;
 }
 .text_content h1 {
   font-size: 24px;
@@ -27,4 +28,10 @@
 }
 .singup__button__link {
   text-decoration: none;
+}
+.signup__input__img {
+  position: absolute;
+  cursor: pointer;
+  right: 33px;
+  top: 328px;
 }

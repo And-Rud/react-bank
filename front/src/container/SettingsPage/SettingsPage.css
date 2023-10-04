@@ -24,3 +24,21 @@
   font-size: 16px;
   font-weight: 500;
 }
+.sett__input__img__1 {
+  position: absolute;
+  cursor: pointer;
+  right: 33px;
+  top: 278px;
+}
+.sett__input__img__2 {
+  position: absolute;
+  cursor: pointer;
+  right: 33px;
+  top: 510px;
+}
+.sett__input__img__3 {
+  position: absolute;
+  cursor: pointer;
+  right: 33px;
+  top: 608px;
+}

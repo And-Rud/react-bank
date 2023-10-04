@@ -2,10 +2,11 @@ import React from "react";
 import Header from "../../component/header/Header";
 import MyButton from "../../component/mybutton/MyButton";
 import Footer from "../../component/footer/Footer";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./WellcomePage.css";
 
 const WellcomePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="wellcome">
       <div className="wcontainer">
@@ -18,12 +19,19 @@ const WellcomePage = () => {
         </div>
       </div>
       <div className="bcontainer">
-        <Link to="/signup">
-          <MyButton className={"button__dark"}>Sign Up</MyButton>
-        </Link>
-        <Link to="/signin">
-          <MyButton className={"button__light"}>Sign In</MyButton>
-        </Link>
+        <MyButton
+          onClick={() => navigate("/signup")}
+          className={"button__dark"}
+        >
+          Sign Up
+        </MyButton>
+
+        <MyButton
+          onClick={() => navigate("/signin")}
+          className={"button__light"}
+        >
+          Sign In
+        </MyButton>
       </div>
       <Footer />
     </div>
