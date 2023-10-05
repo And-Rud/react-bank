@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Error from "./component/Error";
 import AuthRoute from "./component/AuthRoute";
@@ -17,40 +17,48 @@ import RecivePage from "./container/RecivePage/RecivePage";
 import SendPage from "./container/SendPage/SendPage";
 import TransactionPage from "./container/TransactionPage/TransactionPage";
 
-export const AUTH_TYPE = {
-  LOGIN: "login",
-  LOGOUT: "logout",
+export type AuthContextType = {
+  state?: any;
+  dispatch?: any;
 };
 
-const AuthContext = createContext<null | { value: string; toggle: () => void }>(
-  null
-);
-
-export const AUTH_ACTION_TYPE = {
-  TOGGLE: "toggle",
+const initialState = {
+  isLogged: false,
+  token: null,
+  user: null,
 };
 
-const signReducer = (state: string, action: { type: any }) => {
+function authReducer(state: any, action: any) {
   switch (action.type) {
-    case AUTH_ACTION_TYPE.TOGGLE:
-      return state === AUTH_TYPE.LOGIN ? AUTH_TYPE.LOGIN : AUTH_TYPE.LOGOUT;
-
+    case "LOGIN":
+      return {
+        ...state,
+        isLogged: true,
+        token: action.payload.token,
+        user: action.payload.user,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        isLogged: false,
+        token: null,
+        user: null,
+      };
     default:
       return state;
   }
-};
+}
+
+export const AuthContext = createContext<AuthContextType | null>(null);
 
 const App = () => {
-  const [auth, dispatch] = useReducer(signReducer, AUTH_TYPE.LOGOUT);
-  const authContextData = useMemo(
-    () => ({
-      value: auth,
-      toggle: () => dispatch({ type: AUTH_ACTION_TYPE.TOGGLE }),
-    }),
-    [auth]
+  const [state, dispatch]: [state: any, dispatch: any] = useReducer(
+    authReducer,
+    initialState
   );
+
   return (
-    <AuthContext.Provider value={authContextData}>
+    <AuthContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
         <Routes>
           <Route

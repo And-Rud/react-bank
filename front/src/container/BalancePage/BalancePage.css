@@ -57,6 +57,7 @@
   gap: 12px;
   cursor: pointer;
   margin: 0px 20px;
+  padding-bottom: 13px;
 }
 .bal__user__link {
   text-decoration: none;
@@ -104,4 +105,9 @@
 }
 .bal__mount__minus {
   color: #1d1d1f;
+}
+.card__item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

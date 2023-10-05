@@ -20,14 +20,14 @@ const RecoveryConfirmPage = () => {
       <Arrowback />
       <div className="main">
         <div className="text_content">
-          <h1>Recovery password</h1>
+          <h1>Recover password</h1>
           <p>Write the code you received</p>
         </div>
         <form className="container">
           <MyInput name="code" text="Code" type="text" />
           <MyInput
             name="password"
-            text="Password"
+            text="New Password"
             type={hide ? "password" : "text"}
           />
           <img

@@ -15,7 +15,7 @@ const RecoveryPage = () => {
       <Arrowback />
       <div className="main">
         <div className="text_content">
-          <h1>Recovery password</h1>
+          <h1>Recover password</h1>
           <p>Choose a recovery method</p>
         </div>
         <form className="container">
@@ -24,7 +24,7 @@ const RecoveryPage = () => {
             onClick={() => navigate("/recovery-confirm")}
             className={"button__dark"}
           >
-            Save code
+            Send code
           </MyButton>
         </form>
       </div>

@@ -5,13 +5,15 @@ const MyButton = ({
   children,
   className,
   onClick,
+  type,
 }: {
-  children: string;
+  children: any;
   className: string;
   onClick?: any;
+  type?: any;
 }) => {
   return (
-    <button className={`button ${className}`} onClick={onClick}>
+    <button type={type} className={`button ${className}`} onClick={onClick}>
       {children}
     </button>
   );

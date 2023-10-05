@@ -24,7 +24,7 @@ const SettingsPage = () => {
           <MyInput name="email" text="Email" type="email" />
           <MyInput
             name="password"
-            text="Password"
+            text="Old Password"
             type={hide ? "password" : "text"}
           />
           <img
@@ -39,7 +39,7 @@ const SettingsPage = () => {
           <div className="set__form__title">Change Password</div>
           <MyInput
             name="password"
-            text="Password"
+            text="Old Password"
             type={hide ? "password" : "text"}
           />
           <img
@@ -50,7 +50,7 @@ const SettingsPage = () => {
           />
           <MyInput
             name="password"
-            text="Password"
+            text="New Password"
             type={hide ? "password" : "text"}
           />
           <img
