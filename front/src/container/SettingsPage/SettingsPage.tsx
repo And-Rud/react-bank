@@ -1,17 +1,96 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./SettingsPage.css";
 import Header from "../../component/header/Header";
 import Arrowback from "../../component/arrow-back/Arrow-back";
 import MyInput from "../../component/input/MyInput";
 import MyButton from "../../component/mybutton/MyButton";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext, AuthContextType } from "../../App";
 
 const SettingsPage = () => {
+  const { state, dispatch } = useContext(AuthContext) as AuthContextType;
+
+  const [formData1, setFormData1] = useState({
+    email: "",
+    passwordOld1: "",
+    id: null,
+  });
+  const [formData2, setFormData2] = useState({
+    passwordOld2: "",
+    passwordNew: "",
+    id: null,
+  });
   const navigate = useNavigate();
-  const [hide, setHide] = useState(true);
-  const handleSplitClick = () => {
-    if (hide) setHide(false);
-    if (!hide) setHide(true);
+  const [hide1, setHide1] = useState(true);
+  const [hide2, setHide2] = useState(true);
+  const [hide3, setHide3] = useState(true);
+  const handleSplitClick1 = () => {
+    if (hide1) setHide1(false);
+    if (!hide1) setHide1(true);
+  };
+  const handleSplitClick2 = () => {
+    if (hide2) setHide2(false);
+    if (!hide2) setHide2(true);
+  };
+  const handleSplitClick3 = () => {
+    if (hide3) setHide3(false);
+    if (!hide3) setHide3(true);
+  };
+  const handleClickMail = async (event: any) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/settings/mail",
+        formData1
+      );
+      const data = response.data;
+
+      setFormData1({
+        email: "",
+        passwordOld1: "",
+        id: state.user.id,
+      });
+
+      console.log("Відповідь від сервера:", data);
+    } catch (error) {
+      console.log("Помилка відправки запиту:", error);
+    }
+  };
+  const handleClickPassword = async (event: any) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/settings/password",
+        formData2
+      );
+      const data = response.data;
+
+      setFormData2({
+        passwordOld2: "",
+        passwordNew: "",
+        id: state.user.id,
+      });
+
+      console.log("Відповідь від сервера:", data);
+    } catch (error) {
+      console.log("Помилка відправки запиту:", error);
+    }
+  };
+  const handleChangeMail = (event: any) => {
+    const { name, value } = event.target;
+    setFormData1({ ...formData1, [name]: value, id: state.user.id });
+  };
+  const handleChangePassword = (event: any) => {
+    const { name, value } = event.target;
+    setFormData2({ ...formData2, [name]: value, id: state.user.id });
+  };
+  const logout = () => {
+    if (dispatch) {
+      dispatch({ type: "LOGOUT" });
+
+      navigate("/");
+    }
   };
   return (
     <div className="set__main">
@@ -19,49 +98,65 @@ const SettingsPage = () => {
       <Arrowback />
       <div className="set__container">
         <div className="set__title">Settings</div>
-        <form className="set__form">
+        <form onSubmit={handleClickMail} className="set__form">
           <div className="set__form__title">Change Email</div>
-          <MyInput name="email" text="Email" type="email" />
           <MyInput
-            name="password"
+            onChange={handleChangeMail}
+            value={formData1.email}
+            name="email"
+            text="Email"
+            type="email"
+          />
+          <MyInput
+            onChange={handleChangeMail}
+            value={formData1.passwordOld1}
+            name="passwordOld1"
             text="Old Password"
-            type={hide ? "password" : "text"}
+            type={hide1 ? "password" : "text"}
           />
           <img
-            onClick={handleSplitClick}
+            onClick={handleSplitClick1}
             className="sett__input__img__1"
-            src={hide ? "/svg/eye.svg" : "/svg/eye_hide.svg"}
+            src={hide1 ? "/svg/eye.svg" : "/svg/eye_hide.svg"}
             alt=""
           />
-          <MyButton className={"button__light"}>Save Email </MyButton>
+          <MyButton type="submit" className={"button__light"}>
+            Save Email
+          </MyButton>
         </form>
-        <form className="set__form">
+        <form onSubmit={handleClickPassword} className="set__form">
           <div className="set__form__title">Change Password</div>
           <MyInput
-            name="password"
+            onChange={handleChangePassword}
+            value={formData2.passwordOld2}
+            name="passwordOld2"
             text="Old Password"
-            type={hide ? "password" : "text"}
+            type={hide2 ? "password" : "text"}
           />
           <img
-            onClick={handleSplitClick}
+            onClick={handleSplitClick2}
             className="sett__input__img__2"
-            src={hide ? "/svg/eye.svg" : "/svg/eye_hide.svg"}
+            src={hide2 ? "/svg/eye.svg" : "/svg/eye_hide.svg"}
             alt=""
           />
           <MyInput
-            name="password"
+            onChange={handleChangePassword}
+            value={formData2.passwordNew}
+            name="passwordNew"
             text="New Password"
-            type={hide ? "password" : "text"}
+            type={hide3 ? "password" : "text"}
           />
           <img
-            onClick={handleSplitClick}
+            onClick={handleSplitClick3}
             className="sett__input__img__3"
-            src={hide ? "/svg/eye.svg" : "/svg/eye_hide.svg"}
+            src={hide3 ? "/svg/eye.svg" : "/svg/eye_hide.svg"}
             alt=""
           />
-          <MyButton className={"button__light"}>Save Password </MyButton>
+          <MyButton type="submit" className={"button__light"}>
+            Save Password
+          </MyButton>
         </form>
-        <MyButton onClick={() => navigate("/")} className={"button__light"}>
+        <MyButton onClick={logout} className={"button__light"}>
           Logout
         </MyButton>
       </div>

@@ -26,6 +26,8 @@ const SignupConfirmPage = () => {
         formData
       );
       const data = response.data;
+
+      console.log("state", state);
       console.log(response);
       if (response.status === 200) {
         navigate("/balance");

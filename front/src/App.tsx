@@ -26,6 +26,7 @@ const initialState = {
   isLogged: false,
   token: null,
   user: null,
+  currentTid: null,
 };
 
 function authReducer(state: any, action: any) {
@@ -36,6 +37,7 @@ function authReducer(state: any, action: any) {
         isLogged: true,
         token: action.payload.token,
         user: action.payload.user,
+        currentTid: action.payload.tid,
       };
     case "LOGOUT":
       return {
@@ -43,6 +45,7 @@ function authReducer(state: any, action: any) {
         isLogged: false,
         token: null,
         user: null,
+        currentTid: null,
       };
     default:
       return state;

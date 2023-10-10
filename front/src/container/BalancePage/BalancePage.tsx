@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./BalancePage.css";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext, AuthContextType } from "../../App";
 
 const BalancePage = () => {
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(AuthContext) as AuthContextType;
   const [info, setInfo] = useState<null | {
-    sum: number;
-    sys: string;
-    mes: string;
-    time: string;
+    userSum: any;
+    user: any;
   }>(null);
   const [card, setCard]: [card: any, setCard: any] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/balance");
-        const {
-          sum,
-          sys,
-          mes,
-          time,
-        }: { sum: number; sys: string; mes: string; time: string } =
-          response.data.reverse()[0];
-        if (sum && sys && mes && time) setInfo({ sum, sys, mes, time });
-        if (response.data) setCard(response.data);
-        console.log("Отримані дані балансу:", { sum, sys, mes, time });
+        const response = await axios.get(
+          `http://localhost:4000/balance?userId=${state.user.id}`
+        );
+        let user = response.data;
+        if (user) setInfo(user);
+        if (user.payment) setCard(user.payment);
+
+        console.log("Отримані дані балансу:", info ? info.userSum : null);
       } catch (error) {
         console.error("Помилка отримання даних балансу:", error);
       }
@@ -35,6 +33,14 @@ const BalancePage = () => {
 
     fetchData();
   }, []);
+
+  const handleClickBut = (tid: number) => {
+    if (tid) {
+      console.log("dispatch", tid);
+      dispatch({ type: "LOGIN", payload: { currentTid: tid } });
+    }
+    if (info) navigate(`/transaction/:id:transaction`);
+  };
 
   return (
     <div>
@@ -50,7 +56,7 @@ const BalancePage = () => {
           </Link>
         </div>
         {info ? (
-          <div className="bal__money">${info.sum}</div>
+          <div className="bal__money">${info.userSum}</div>
         ) : (
           <div>Завантаження данних</div>
         )}
@@ -66,10 +72,14 @@ const BalancePage = () => {
         <span>Send</span>
       </div>
       <div className="card__item">
-        <Link className="bal__user__link" to="/transaction/:transactionId">
-          {card ? (
-            card.map((item: any, index: number) => (
-              <div key={index} className="bal__user">
+        {card ? (
+          card.reverse().map((item: any, index: number) => (
+            <Link
+              key={index}
+              className="bal__user__link"
+              to={`/transaction/${item.tid}`}
+            >
+              <div className="bal__user">
                 <span className="bal__user__icon">
                   {item.sys[0].toUpperCase()}
                 </span>
@@ -88,14 +98,14 @@ const BalancePage = () => {
                     item.mes === "+" ? "bal__mount__plus" : "bal__mount__minus"
                   } `}
                 >
-                  {item.mes} ${item.sum}
+                  {item.mes} ${Math.abs(item.sum)}
                 </div>
               </div>
-            ))
-          ) : (
-            <div>Завантаження данних</div>
-          )}
-        </Link>
+            </Link>
+          ))
+        ) : (
+          <div>Транзакції відсутні</div>
+        )}
       </div>
 
       <Footer />

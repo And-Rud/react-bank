@@ -19,6 +19,12 @@
   font-weight: 500;
   color: #24b277;
 }
+.trans__mount__plus {
+  color: #24b277;
+}
+.trans__mount__minus {
+  color: #000;
+}
 .trans__table {
   display: flex;
   flex-direction: column;

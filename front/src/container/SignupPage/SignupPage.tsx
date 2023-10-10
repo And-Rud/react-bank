@@ -14,6 +14,7 @@ const SignupPage = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const [hide, setHide] = useState(true);
+  const [message, setMessage] = useState(false);
   const { dispatch } = useContext(AuthContext) as AuthContextType;
   const handleSplitClick = () => {
     if (hide) setHide(false);
@@ -28,16 +29,26 @@ const SignupPage = () => {
       );
       const data = response.data;
       const auth = data.session.token;
-      if (dispatch) {
-        dispatch({ type: "LOGIN", payload: { token: auth } });
-      }
+      const user = data.session.user;
+      const code = data.confirm.code;
+      console.log("response", response.data);
 
-      localStorage.setItem("auth", auth);
-      if (response) navigate("/signup-confirm");
+      if (dispatch) {
+        dispatch({ type: "LOGIN", payload: { token: auth, user: user } });
+      }
+      setTimeout(() => alert(JSON.stringify({ code: code })), 1000);
+
+      if (response) {
+        return navigate("/signup-confirm");
+      } else {
+        console.log(response);
+      }
 
       console.log("Відповідь від сервера:", data, data.session.token);
     } catch (error) {
       console.log("Помилка відправки запиту:", error);
+      setMessage(true);
+      setTimeout(() => setMessage(false), 3000);
     }
   };
   const handleChange = (event: any) => {
@@ -80,7 +91,7 @@ const SignupPage = () => {
           <MyButton type="submit" className={"button__dark"}>
             Continue
           </MyButton>
-          <MyAlert />
+          {message ? <MyAlert /> : <div></div>}
         </form>
       </div>
 

@@ -1,11 +1,14 @@
 class Payment {
   static #list = []
+  static tid = 1
 
-  constructor({ sum, sys, mes }) {
+  constructor({ sum, sys, mes, id }) {
     this.sum = Number(sum)
     this.sys = sys
     this.mes = mes
+    this.id = Number(id)
     this.time = Payment.getTime()
+    this.tid = Payment.tid++
   }
 
   static create(data) {
@@ -18,10 +21,11 @@ class Payment {
     return this.#list
   }
 
-  static getById(id) {
+  static getByTid(tid) {
     return (
-      this.#list.find((user) => user.id === Number(id)) ||
-      null
+      this.#list.find(
+        (payment) => payment.tid === Number(tid),
+      ) || null
     )
   }
 

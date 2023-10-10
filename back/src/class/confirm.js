@@ -11,13 +11,15 @@ class Confirm {
   }
 
   static create = (data) => {
-    this.#list.push(new Confirm(data))
+    const confirm = new Confirm(data)
+    this.#list.push(confirm)
 
     setTimeout(() => {
       this.delete(code)
     }, 86400000)
 
     console.log(this.#list)
+    return confirm
   }
 
   static delete = (code) => {
@@ -31,7 +33,7 @@ class Confirm {
 
   static getData = (code) => {
     const el = this.#list.find((item) => item.code === code)
-    return el ? el.data : null
+    return el ? el : null
   }
 }
 

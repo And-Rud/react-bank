@@ -7,6 +7,9 @@ class User {
     this.email = String(email).toLowerCase()
     this.password = String(password)
     this.isConfirm = false
+    this.userSum = 0
+    this.payment = []
+    this.notif = []
   }
 
   static create(data) {
@@ -34,6 +37,14 @@ class User {
     return (
       this.#list.find((user) => user.id === Number(id)) ||
       null
+    )
+  }
+
+  static paymentById = (payId) => {
+    return (
+      this.user.payment.find(
+        (payment) => payment.tid === Number(payId),
+      ) || null
     )
   }
 }

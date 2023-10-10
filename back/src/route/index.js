@@ -3,14 +3,12 @@ const express = require('express')
 const router = express.Router()
 
 // Підключіть файли роутів
-const auth = require('./auth')
-const user = require('./user')
+const bank = require('./bank')
 
 // Підключіть інші файли роутів, якщо є
 
 // Об'єднайте файли роутів за потреби
-router.use('/', auth)
-router.use('/', user)
+router.use('/', bank)
 
 // Використовуйте інші файли роутів, якщо є
 

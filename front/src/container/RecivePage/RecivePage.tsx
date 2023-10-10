@@ -5,27 +5,35 @@ import Arrowback from "../../component/arrow-back/Arrow-back";
 import Footer from "../../component/footer/Footer";
 import MyInput from "../../component/input/MyInput";
 import axios from "axios";
+import { AuthContext, AuthContextType } from "../../App";
 
 const RecivePage = () => {
+  const { state } = useContext(AuthContext) as AuthContextType;
   const [formData, setFormData] = useState({
     sum: "",
     sys: "",
     mes: "+",
+    id: null,
   });
 
   const handleClick = async (event: any) => {
     event.preventDefault();
     try {
+      console.log("state", state);
       const response = await axios.post(
         "http://localhost:4000/recive",
         formData
       );
       const data = response.data;
-      setFormData({
-        sum: "",
-        sys: "",
-        mes: "+",
-      });
+      if (state.user.id) {
+        setFormData({
+          sum: "",
+          sys: "",
+          mes: "+",
+          id: state.user.id,
+        });
+      }
+
       console.log("Відповідь від сервера:", data);
     } catch (error) {
       console.log("Помилка відправки запиту:", error);
@@ -33,7 +41,7 @@ const RecivePage = () => {
   };
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value, id: state.user.id });
   };
   const handleButtonClick = (action: string) => {
     if (action === "stripe") {
